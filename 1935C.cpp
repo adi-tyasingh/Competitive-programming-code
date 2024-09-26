@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+/* clang-format off */
 
 /* TYPES  */
 #define ll long long
@@ -43,46 +44,21 @@ typedef unsigned long int uint32;
 typedef long long int int64;
 typedef unsigned long long int  uint64;
 
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////ASLI MAAL////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 int solve()
 {
-    int n, x=0,y=0;
+    long long n;
     cin>>n;
-    string s;
-    cin>>s;
-    for(char c:s)
+    string str;
+    cin>>str;
+    string s2 = str;
+    reverse(s2.begin(),s2.end());
+    if ( str <= s2 )
     {
-        if (c=='U')
-        {
-            y++;
-        }
-        else if (c=='D')
-        {
-            y--;
-        }
-        else if (c=='R')
-        {
-            x++;
-        }
-        else
-        {
-            x--;
-        }
-
-        if(x==1 && y==1)
-        {
-            cout<<"YES\n";
-            return 0;
-        }
+        cout<<str<<endl;
     }
-    cout<<"NO\n";
+    else{
+        cout<<s2<<str<<endl;
+    }
     return 0;
 }
 
@@ -90,13 +66,11 @@ int solve()
 /* Main()  function */
 int main()
 {
-    int tc=1;
-    cin>>tc;
+int tc=1;
+cin>>tc;
 
-    while(tc--)
-    {
-        solve();
-    }
-
-    return 0;
+while(tc--){
+solve();
+}
+return 0;
 }

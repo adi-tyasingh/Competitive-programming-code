@@ -53,36 +53,50 @@ typedef unsigned long long int  uint64;
 
 int solve()
 {
-    int n, x=0,y=0;
-    cin>>n;
-    string s;
-    cin>>s;
-    for(char c:s)
+    int n, l;
+    cin>>n>>l;
+    vector<pair<vector<int>, string>> vec(n);
+    vector<string> input(n);
+    f(i, 0, n)
     {
-        if (c=='U')
+        cin>>input[i];
+    }
+
+    f(i, 0, n)
+    {
+        string s = input[i];
+        vector<int>v(l);
+        cf(j, 1, l)
         {
-            y++;
-        }
-        else if (c=='D')
-        {
-            y--;
-        }
-        else if (c=='R')
-        {
-            x++;
-        }
-        else
-        {
-            x--;
+            if(j%2==0)
+            {
+                v[j-1] = ('Z' - s[j-1]);
+            }
+            else
+            {
+                v[j-1] = (s[j-1] - 'A');
+            }
         }
 
-        if(x==1 && y==1)
-        {
-            cout<<"YES\n";
-            return 0;
-        }
+        vec[i].first = v ;
+        vec[i].second = s;
     }
-    cout<<"NO\n";
+
+    sort(vec.begin(), vec.end());
+    unordered_map<string , int>map;
+    
+    f(i, 0, n)
+    {
+        map[input[i]] = i+1;
+    }
+
+    f(i, 0, n)
+    {
+        cout<<map[vec[i].second]<<" ";
+    }
+
+    cout<<endl;
+    
     return 0;
 }
 
@@ -91,7 +105,7 @@ int solve()
 int main()
 {
     int tc=1;
-    cin>>tc;
+    //cin>>tc;
 
     while(tc--)
     {

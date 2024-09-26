@@ -18,6 +18,7 @@ using namespace std;
 #define rf(i,e,s) for(long long int i=e-1;i>=s;i--)
 #define pb push_back
 #define eb emplace_back
+#define all(vec) vec.begin(), vec.end()
 
 /* PRINTS */
 template <class T>
@@ -53,36 +54,34 @@ typedef unsigned long long int  uint64;
 
 int solve()
 {
-    int n, x=0,y=0;
+    int n;
     cin>>n;
-    string s;
-    cin>>s;
-    for(char c:s)
-    {
-        if (c=='U')
-        {
-            y++;
-        }
-        else if (c=='D')
-        {
-            y--;
-        }
-        else if (c=='R')
-        {
-            x++;
-        }
-        else
-        {
-            x--;
-        }
+    vi vec(3);
+    cin>>vec[0]>>vec[1]>>vec[2];
+    sort(all(vec));
+    ll res = 0;
 
-        if(x==1 && y==1)
+    int end = n/vec[0] + 1;
+    f(i, 0, end)
+    {
+        f(j, 0, end)
         {
-            cout<<"YES\n";
-            return 0;
+            if (vec[0]*i + vec[1]*j > n)
+            {
+                break;
+            }
+            
+            if ((n - vec[0]*i - vec[1]*j)%vec[2] == 0)
+            {
+                ll k = ((n - vec[0]*i - vec[1]*j)/vec[2]);
+                res = max(res, i+j+k);
+            }
+                               
         }
     }
-    cout<<"NO\n";
+
+    cout<<res<<endl;
+
     return 0;
 }
 
@@ -91,7 +90,7 @@ int solve()
 int main()
 {
     int tc=1;
-    cin>>tc;
+    //cin>>tc;
 
     while(tc--)
     {

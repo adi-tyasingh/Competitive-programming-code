@@ -53,36 +53,29 @@ typedef unsigned long long int  uint64;
 
 int solve()
 {
-    int n, x=0,y=0;
+    int n, res=0;
     cin>>n;
     string s;
     cin>>s;
-    for(char c:s)
+    vi fw(n), bw(n);
+    sc st;
+    f(i,0,n)
     {
-        if (c=='U')
-        {
-            y++;
-        }
-        else if (c=='D')
-        {
-            y--;
-        }
-        else if (c=='R')
-        {
-            x++;
-        }
-        else
-        {
-            x--;
-        }
-
-        if(x==1 && y==1)
-        {
-            cout<<"YES\n";
-            return 0;
-        }
+        st.insert(s[i]);
+        fw[i]=st.size();
     }
-    cout<<"NO\n";
+    st.clear();
+    rf(i, n, 0)
+    {
+        bw[i]=st.size();
+        st.insert(s[i]);
+    }
+
+    f(i,0,n)
+    {
+        res = max(res, fw[i]+bw[i]);
+    }
+    cout<<res<<endl;
     return 0;
 }
 

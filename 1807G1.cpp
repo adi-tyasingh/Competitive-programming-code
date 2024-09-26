@@ -53,36 +53,33 @@ typedef unsigned long long int  uint64;
 
 int solve()
 {
-    int n, x=0,y=0;
+    int n;
     cin>>n;
-    string s;
-    cin>>s;
-    for(char c:s)
+    vector<int>vec(n);
+    for(int i=0; i<n; i++)
     {
-        if (c=='U')
+        cin>>vec[i];
+    }
+    sort(vec.begin(), vec.end());
+    long long value = 1;
+    if(vec[0]!=1)
+    {
+        cout<<"NO\n";
+        return 0;
+    }
+    for(int i=1; i<n; i++)
+    {
+        if (value < vec[i])
         {
-            y++;
-        }
-        else if (c=='D')
-        {
-            y--;
-        }
-        else if (c=='R')
-        {
-            x++;
+            cout<<"NO\n";
+            return 0;
         }
         else
         {
-            x--;
-        }
-
-        if(x==1 && y==1)
-        {
-            cout<<"YES\n";
-            return 0;
+            value += vec[i];
         }
     }
-    cout<<"NO\n";
+    cout<<"YES\n";
     return 0;
 }
 
@@ -92,7 +89,6 @@ int main()
 {
     int tc=1;
     cin>>tc;
-
     while(tc--)
     {
         solve();

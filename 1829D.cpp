@@ -51,38 +51,28 @@ typedef unsigned long long int  uint64;
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+bool check(int n, int m)
+{
+    if(n == m) return true;
+    if(n%3!=0) return false;
+    else
+    {
+        return (check(n/3, m) || check(2*n/3, m));
+    }
+}
+
 int solve()
 {
-    int n, x=0,y=0;
-    cin>>n;
-    string s;
-    cin>>s;
-    for(char c:s)
+    int n,m;
+    cin>>n>>m;
+    if (check(n, m))
     {
-        if (c=='U')
-        {
-            y++;
-        }
-        else if (c=='D')
-        {
-            y--;
-        }
-        else if (c=='R')
-        {
-            x++;
-        }
-        else
-        {
-            x--;
-        }
-
-        if(x==1 && y==1)
-        {
-            cout<<"YES\n";
-            return 0;
-        }
+        cout<<"YES\n";
     }
-    cout<<"NO\n";
+    else
+    {
+        cout<<"NO\n";
+    }
     return 0;
 }
 

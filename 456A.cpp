@@ -12,6 +12,9 @@ using namespace std;
 #define si set<int>
 #define sc set<char>
 
+#define FI first
+#define SE second
+
 /* FUNCTIONS */
 #define f(i,s,e) for(long long int i=s;i<e;i++)
 #define cf(i,s,e) for(long long int i=s;i<=e;i++)
@@ -51,47 +54,61 @@ typedef unsigned long long int  uint64;
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+bool cmp(pii a, pii b)
+{
+    return a.second < b.second;
+}
+
 int solve()
 {
-    int n, x=0,y=0;
+    ll n;
     cin>>n;
-    string s;
-    cin>>s;
-    for(char c:s)
+    vector<pii> laptops;
+    si qualities;
+    f(i, 0, n)
     {
-        if (c=='U')
+        int a,b;
+        cin>>a>>b;
+        if(qualities.count(b)==0)
         {
-            y++;
+            laptops.push_back({a,b});
+            qualities.insert(b);
         }
-        else if (c=='D')
+    } 
+
+    sort(laptops.begin(), laptops.end(), cmp);
+
+    // for(int i=0; i<laptops.size(); i++)
+    // {
+    //     cout<<laptops[i].first<<" "<<laptops[i].second<<endl;
+    // }
+
+    int msf = laptops[0].first;
+    f(i, 1, laptops.size())
+    {
+        if(laptops[i].first < msf)
         {
-            y--;
-        }
-        else if (c=='R')
-        {
-            x++;
+            cout<<"Happy Alex\n";
+            return 0;
         }
         else
         {
-            x--;
-        }
-
-        if(x==1 && y==1)
-        {
-            cout<<"YES\n";
-            return 0;
+            msf = laptops[i].first;
         }
     }
-    cout<<"NO\n";
+
+    cout<<"Poor Alex"<<endl;
+
     return 0;
 }
+
 
 
 /* Main()  function */
 int main()
 {
     int tc=1;
-    cin>>tc;
+    //cin>>tc;
 
     while(tc--)
     {

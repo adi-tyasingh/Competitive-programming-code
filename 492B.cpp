@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#include<iomanip>
 using namespace std;
 
 
@@ -53,36 +54,32 @@ typedef unsigned long long int  uint64;
 
 int solve()
 {
-    int n, x=0,y=0;
-    cin>>n;
-    string s;
-    cin>>s;
-    for(char c:s)
+    int n;
+    double l;
+    cout<<fixed<<setprecision(10);
+    cin>>n>>l;
+    vector<double>vec(n);
+    f(i, 0, n)
     {
-        if (c=='U')
-        {
-            y++;
-        }
-        else if (c=='D')
-        {
-            y--;
-        }
-        else if (c=='R')
-        {
-            x++;
-        }
-        else
-        {
-            x--;
-        }
-
-        if(x==1 && y==1)
-        {
-            cout<<"YES\n";
-            return 0;
-        }
+        cin>>vec[i];
     }
-    cout<<"NO\n";
+    sort(vec.begin(), vec.end());
+    double res = -1.0;
+    f(i,1,n)
+    {
+        double d = abs(vec[i] - vec[i-1])/2.0;
+        res = max(res, d);
+    }
+    if(vec[0]!=0)
+    {
+        res = max(res, vec[0]);
+    }
+    if(vec[n-1]!=l)
+    {
+        res = max(res, l-vec[n-1]);
+    }
+    
+    cout<<res<<endl;
     return 0;
 }
 
@@ -91,7 +88,7 @@ int solve()
 int main()
 {
     int tc=1;
-    cin>>tc;
+    //cin>>tc;
 
     while(tc--)
     {

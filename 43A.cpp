@@ -53,36 +53,27 @@ typedef unsigned long long int  uint64;
 
 int solve()
 {
-    int n, x=0,y=0;
+    map<string,int>mp;
+    int n;
     cin>>n;
-    string s;
-    cin>>s;
-    for(char c:s)
+    for(int i=0; i<n;i++)
     {
-        if (c=='U')
+        string x;
+        cin>>x;
+        mp[x]++;
+    }
+    string res = "";
+    n = -1;
+    for(auto it = mp.begin(); it!=mp.end(); it++)
+    {
+        if(it->second>n)
         {
-            y++;
-        }
-        else if (c=='D')
-        {
-            y--;
-        }
-        else if (c=='R')
-        {
-            x++;
-        }
-        else
-        {
-            x--;
-        }
-
-        if(x==1 && y==1)
-        {
-            cout<<"YES\n";
-            return 0;
+            n = it->second;
+            res = it->first;
         }
     }
-    cout<<"NO\n";
+    cout<<res<<endl;
+    
     return 0;
 }
 
@@ -91,7 +82,7 @@ int solve()
 int main()
 {
     int tc=1;
-    cin>>tc;
+    //cin>>tc;
 
     while(tc--)
     {

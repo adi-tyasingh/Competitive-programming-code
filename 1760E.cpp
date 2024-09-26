@@ -53,36 +53,84 @@ typedef unsigned long long int  uint64;
 
 int solve()
 {
-    int n, x=0,y=0;
+    int n = 0;
     cin>>n;
-    string s;
-    cin>>s;
-    for(char c:s)
+    vi vec(n);
+    bool flag = true;
+    int first0 = -1;
+    int last1 = -1;
+    f(i, 0, n)
     {
-        if (c=='U')
+        cin>>vec[i];
+
+        if(flag && vec[i] < 1)
         {
-            y++;
+            flag = false;
+            first0 = i;
         }
-        else if (c=='D')
+
+        if(vec[i] == 1)
         {
-            y--;
+            last1 = i;
         }
-        else if (c=='R')
+    }
+    long long res = 0;
+    int zero_count = 0;
+    long long inv_count = 0;
+    for(int i= n-1; i > -1; i--)
+    {
+        if(vec[i]==0)
         {
-            x++;
+            zero_count++;
         }
         else
         {
-            x--;
-        }
-
-        if(x==1 && y==1)
-        {
-            cout<<"YES\n";
-            return 0;
+            inv_count+= zero_count;
         }
     }
-    cout<<"NO\n";
+    res = max(res, inv_count);
+
+    if(first0 != -1)
+    {
+        zero_count = 0;
+        inv_count = 0;
+        vec[first0] = 1;
+        for(int i= n-1; i > -1; i--)
+        {
+            if(vec[i]==0)
+            {
+                zero_count++;
+            }
+            else
+            {
+                inv_count+= zero_count;
+            }
+        }
+        res = max(res, inv_count);
+        vec[first0] = 0;
+    }
+
+    if(last1 != -1)
+    {
+        zero_count = 0;
+        inv_count = 0;
+        vec[last1] = 0;
+        for(int i= n-1; i > -1; i--)
+        {
+            if(vec[i]==0)
+            {
+                zero_count++;
+            }
+            else
+            {
+                inv_count+= zero_count;
+            }
+        }
+        res = max(res, inv_count);
+    }
+
+    cout<< res <<endl; 
+
     return 0;
 }
 

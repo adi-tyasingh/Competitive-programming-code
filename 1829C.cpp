@@ -53,36 +53,50 @@ typedef unsigned long long int  uint64;
 
 int solve()
 {
-    int n, x=0,y=0;
+    int n;
     cin>>n;
-    string s;
-    cin>>s;
-    for(char c:s)
+    vector<int>v1, v2, v3;
+    f(i, 0, n)
     {
-        if (c=='U')
+        int x;
+        string s;
+        cin>>x;
+        cin>>s;
+        if(s=="11")
         {
-            y++;
+            v3.pb(x);
         }
-        else if (c=='D')
+        else if(s=="10")
         {
-            y--;
+            v2.pb(x);
         }
-        else if (c=='R')
+        else if(s=="01")
         {
-            x++;
-        }
-        else
-        {
-            x--;
-        }
-
-        if(x==1 && y==1)
-        {
-            cout<<"YES\n";
-            return 0;
+            v1.pb(x);
         }
     }
-    cout<<"NO\n";
+    sort(v1.begin(), v1.end());
+    sort(v2.begin(), v2.end());
+    sort(v3.begin(), v3.end());
+    int res = 100000000;
+    if(v3.size()==0 && (v2.size()==0 || v1.size()==0))
+    {
+        cout<<-1<<endl;
+        return 0;
+    }
+    else
+    {
+        if(v3.size()>0)
+        {
+            res = v3[0];
+        }
+
+        if(v1.size()>0 && v2.size()>0)
+        {
+            res = min(res, v1[0]+v2[0]);
+        }
+    }
+    cout<<res<<endl;
     return 0;
 }
 

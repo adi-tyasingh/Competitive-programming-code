@@ -18,6 +18,7 @@ using namespace std;
 #define rf(i,e,s) for(long long int i=e-1;i>=s;i--)
 #define pb push_back
 #define eb emplace_back
+#define all(v) v.begin(), v.end()
 
 /* PRINTS */
 template <class T>
@@ -53,36 +54,28 @@ typedef unsigned long long int  uint64;
 
 int solve()
 {
-    int n, x=0,y=0;
+    ll n, res = 0; 
     cin>>n;
-    string s;
-    cin>>s;
-    for(char c:s)
+    vll values, indexes;
+    cf(i, 1, n)
     {
-        if (c=='U')
+        int x;
+        cin>>x;
+        if(x < i)
         {
-            y++;
-        }
-        else if (c=='D')
-        {
-            y--;
-        }
-        else if (c=='R')
-        {
-            x++;
-        }
-        else
-        {
-            x--;
-        }
-
-        if(x==1 && y==1)
-        {
-            cout<<"YES\n";
-            return 0;
+            indexes.pb(i);
+            values.pb(x);
         }
     }
-    cout<<"NO\n";
+
+    sort(all(values));
+
+    for (auto x: indexes){
+        res += values.end() - upper_bound(all(values), x);
+    }
+
+    cout<< res <<endl;
+
     return 0;
 }
 

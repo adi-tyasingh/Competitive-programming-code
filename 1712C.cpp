@@ -15,7 +15,7 @@ using namespace std;
 /* FUNCTIONS */
 #define f(i,s,e) for(long long int i=s;i<e;i++)
 #define cf(i,s,e) for(long long int i=s;i<=e;i++)
-#define rf(i,e,s) for(long long int i=e-1;i>=s;i--)
+#define rf(i,e,s) for(long long int i=e;i>=s;i--)
 #define pb push_back
 #define eb emplace_back
 
@@ -53,36 +53,41 @@ typedef unsigned long long int  uint64;
 
 int solve()
 {
-    int n, x=0,y=0;
+    int n;
     cin>>n;
-    string s;
-    cin>>s;
-    for(char c:s)
-    {
-        if (c=='U')
-        {
-            y++;
-        }
-        else if (c=='D')
-        {
-            y--;
-        }
-        else if (c=='R')
-        {
-            x++;
-        }
-        else
-        {
-            x--;
-        }
+    vector<int>vec(n);
+    f(i, 0, n) cin>>vec[i];
+    int k = -1;
 
-        if(x==1 && y==1)
+    unordered_map<int, int>mp;
+
+    rf(i, n-1, 1)
+    {
+        if(mp.count(vec[i]) == 0)
         {
-            cout<<"YES\n";
-            return 0;
+            mp[vec[i]] = i+1;
+            //cout<<"----"<<mp[vec[i]]<<endl;
+        }    
+
+        if(vec[i] < vec[i-1])
+        {
+            k = i;
+            break;
         }
     }
-    cout<<"NO\n";
+
+    set<int>s;
+    f(i, 0, k)
+    {
+        s.insert(vec[i]);
+        if( mp[vec[i]] > 0 )
+        {
+            k = max(k, mp[vec[i]]-1);
+        }
+    }
+
+    cout<<s.size()<<endl;
+
     return 0;
 }
 

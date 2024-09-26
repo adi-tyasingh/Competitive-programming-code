@@ -21,7 +21,7 @@ using namespace std;
 
 /* PRINTS */
 template <class T>
-void print_v(vector<T> &v) {  for (auto x : v) cout << x << " "; }
+void print_v(vector<T> &v) {  for (auto x : v) cout << x << " ": }
 
 /* UTILS */
 #define MOD 1000000007
@@ -53,36 +53,7 @@ typedef unsigned long long int  uint64;
 
 int solve()
 {
-    int n, x=0,y=0;
-    cin>>n;
-    string s;
-    cin>>s;
-    for(char c:s)
-    {
-        if (c=='U')
-        {
-            y++;
-        }
-        else if (c=='D')
-        {
-            y--;
-        }
-        else if (c=='R')
-        {
-            x++;
-        }
-        else
-        {
-            x--;
-        }
-
-        if(x==1 && y==1)
-        {
-            cout<<"YES\n";
-            return 0;
-        }
-    }
-    cout<<"NO\n";
+    
     return 0;
 }
 

@@ -53,36 +53,41 @@ typedef unsigned long long int  uint64;
 
 int solve()
 {
-    int n, x=0,y=0;
-    cin>>n;
-    string s;
-    cin>>s;
-    for(char c:s)
+    ll n, k;
+    cin>>n>>k;
+    vector<ll>v(n);
+    map<ll, pair<ll, ll>> map;
+    for(int i=0; i<n; i++)
     {
-        if (c=='U')
+        int x;
+        cin>>v[i];
+        cin>>x;
+        if(!map.count(v[i]))
         {
-            y++;
-        }
-        else if (c=='D')
-        {
-            y--;
-        }
-        else if (c=='R')
-        {
-            x++;
+            map[v[i]].first = i;
+            map[v[i]].second = i;
         }
         else
         {
-            x--;
-        }
-
-        if(x==1 && y==1)
-        {
-            cout<<"YES\n";
-            return 0;
+            map[v[i]].second = i;
         }
     }
-    cout<<"NO\n";
+
+
+    for(int i=0; i<k; i++)
+    {
+        ll s,d;
+        cin>>s>>d;
+        if (!map.count(s) || !map.count(d) || !(map[s].first < map[d].second) )
+        {
+            cout<<"NO\n";
+        }
+        else
+        {
+            cout<<"YES\n";
+        }
+    }
+
     return 0;
 }
 
@@ -90,6 +95,8 @@ int solve()
 /* Main()  function */
 int main()
 {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
     int tc=1;
     cin>>tc;
 

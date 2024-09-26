@@ -53,36 +53,31 @@ typedef unsigned long long int  uint64;
 
 int solve()
 {
-    int n, x=0,y=0;
+    sc a,b,c;
+    int n;
     cin>>n;
     string s;
     cin>>s;
-    for(char c:s)
+    for(int i=0; i<n; i++)
     {
-        if (c=='U')
+        if(i%2==0)
         {
-            y++;
-        }
-        else if (c=='D')
-        {
-            y--;
-        }
-        else if (c=='R')
-        {
-            x++;
+            a.insert(s[i]);
         }
         else
         {
-            x--;
-        }
-
-        if(x==1 && y==1)
-        {
-            cout<<"YES\n";
-            return 0;
+            b.insert(s[i]);
         }
     }
-    cout<<"NO\n";
+    set_intersection(a.begin(), a.end(), b.begin(), b.end(), inserter(c, c.begin()));
+    if (c.size()>0)
+    {
+        cout<<"NO\n";
+    }
+    else
+    {
+        cout<<"YES\n";
+    }
     return 0;
 }
 

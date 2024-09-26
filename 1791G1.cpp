@@ -53,36 +53,30 @@ typedef unsigned long long int  uint64;
 
 int solve()
 {
-    int n, x=0,y=0;
-    cin>>n;
-    string s;
-    cin>>s;
-    for(char c:s)
+    ll n,c,res=0,x;
+    cin>>n>>c;
+    vll vec(n);
+    f(i,0,n)
     {
-        if (c=='U')
+        cin>>x;
+        vec[i] = x + i + 1;
+    }
+    sort(vec.begin(), vec.end());
+    //(i,0,n) cout<<vec[i]<<" ";
+    //cout<<endl;
+    f(i,0,n)
+    {
+        if(vec[i] <= c)
         {
-            y++;
-        }
-        else if (c=='D')
-        {
-            y--;
-        }
-        else if (c=='R')
-        {
-            x++;
+            c -= vec[i];
+            res ++;
         }
         else
         {
-            x--;
-        }
-
-        if(x==1 && y==1)
-        {
-            cout<<"YES\n";
-            return 0;
+            break;
         }
     }
-    cout<<"NO\n";
+    cout<<res<<endl;
     return 0;
 }
 
